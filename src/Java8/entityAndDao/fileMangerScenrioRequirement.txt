@@ -1,0 +1,184 @@
+Below are 20 scenario‐based questions (with varying difficulty levels) that use Java 8 Streams on your `FileManager` entity and its dummy data. You can use these scenarios to practice a wide range of stream operations such as filtering, mapping, grouping, reducing, flat mapping, partitioning, and searching.
+
+---
+
+### **Easy**
+
+1. **Filter by File Size**
+   - *Scenario:* Retrieve all files with a `fileSize` greater than a specified threshold (e.g., 5000 bytes).
+   - *Hint:* Use `filter()` with a lambda that compares `fileSize`.
+
+2. **Extract File Names**
+   - *Scenario:* Create a list of file names (`fileName`) for all files.
+   - *Hint:* Use `map(FileManager::getFileName)` and collect to a list.
+
+3. **Count Files by Owner**
+   - *Scenario:* Count the number of files where the metadata field `"owner"` matches a specific value (e.g., `"user5"`).
+   - *Hint:* Filter by `metadata.get("owner")` and then use `count()`.
+
+4. **Filter by Tag**
+   - *Scenario:* Retrieve all files that include a specific tag (e.g., `"important"`) in their `tags` list.
+   - *Hint:* Use `filter()` and check if `tags.contains("important")`.
+
+5. **Sort by Created Date**
+   - *Scenario:* Sort the list of files by their `createdDate` in ascending order.
+   - *Hint:* Use `sorted()` with a comparator based on `createdDate`.
+
+---
+
+### **Moderate**
+
+6. **Group by File Type**
+   - *Scenario:* Group files by `fileType` and return a map where the key is the file type and the value is the list of files of that type.
+   - *Hint:* Use `Collectors.groupingBy(FileManager::getFileType)`.
+
+7. **Group by Metadata Category**
+   - *Scenario:* Group files based on the `"category"` in their metadata.
+   - *Hint:* Use `Collectors.groupingBy(file -> file.getMetadata().get("category"))`.
+
+8. **Total File Size Calculation**
+   - *Scenario:* Calculate the total file size of all files.
+   - *Hint:* Use `mapToLong(FileManager::getFileSize)` followed by `sum()`.
+
+9. **Distinct Tags Extraction**
+   - *Scenario:* Extract a distinct list of all tags present across all files.
+   - *Hint:* Use `flatMap()` to flatten the `tags` lists, then `distinct()`.
+
+10. **Partition by File Size**
+    - *Scenario:* Partition files into two groups: those with a file size above a certain threshold and those with a file size below that threshold.
+    - *Hint:* Use `Collectors.partitioningBy(file -> file.getFileSize() > threshold)`.
+
+---
+
+### **Difficult**
+
+11. **Find the Largest File**
+    - *Scenario:* Identify the file with the largest `fileSize`.
+    - *Hint:* Use `max()` with a comparator based on `fileSize`.
+
+12. **Average File Size per Category**
+    - *Scenario:* For each metadata category (e.g., `"category"`), compute the average `fileSize` of files belonging to that category.
+    - *Hint:* Group by metadata category and use a downstream collector like `averagingLong()`.
+
+13. **List Read Permissions per File**
+    - *Scenario:* For each file, list the `userId`s from its `permissions` where the `accessLevel` is `"READ"`.
+    - *Hint:* For each file, use `stream()` on `permissions` with a filter and then map to `userId`.
+
+14. **Extract All Version Changes**
+    - *Scenario:* For each file, extract all version changes (from the nested `versionHistory` maps) into a flat list of changes.
+    - *Hint:* Use nested `flatMap()` calls to process the `versionHistory` values and then map to the `changes` field.
+
+15. **Group by Country**
+    - *Scenario:* Group files by the country of their location (from `Location`), and for each country, list the file IDs.
+    - *Hint:* Use `Collectors.groupingBy(file -> file.getLocation().getCountry(), Collectors.mapping(FileManager::getFileId, Collectors.toList()))`.
+
+---
+
+### **Very Difficult**
+
+16. **Filter by Modified Date Range**
+    - *Scenario:* Retrieve files that were modified within a specified date range and sort them by `modifiedDate`.
+    - *Hint:* Filter by comparing `modifiedDate` with the start and end dates, then sort.
+
+17. **Files with Specific Metadata**
+    - *Scenario:* List files where a specified metadata key (e.g., `"owner"`) has a particular value, and then extract a list of their tags.
+    - *Hint:* Filter using the metadata map, then flatMap the tags.
+
+18. **Latest Version per File**
+    - *Scenario:* For each file, determine the latest version (by the most recent `versionDate`) from its `versionHistory`.
+    - *Hint:* For each file, iterate over the values in `versionHistory` (which are lists), flatten them, and use `max()` with a comparator on `versionDate`.
+
+19. **Overdue Files Report**
+    - *Scenario:* Suppose you add a field for expected delivery (or processing) date in `FileManager`. Identify files that are overdue compared to the current date and sort them by how overdue they are.
+    - *Hint:* Filter based on expected date vs. current date and compute the difference using `ChronoUnit.DAYS.between()`, then sort accordingly.
+
+20. **Multi-level Grouping: Owner and City**
+    - *Scenario:* Group files first by their metadata `"owner"`, then within each group, group by the city of their location.
+    - *Hint:* Use nested `Collectors.groupingBy()` calls: first group by `file -> file.getMetadata().get("owner")` and then group by `file.getLocation().getCity()`.
+
+---
+
+--------------Complex-----------------------------
+---
+
+1. **Count Files per Tag**
+   *Scenario:* Create a map where each tag (from all files) is a key, and its value is the total number of files associated with that tag.
+   *Hint:* Use `flatMap()` on the tags lists, then group by tag and count occurrences.
+
+2. **Most Common File Type per Country**
+   *Scenario:* Group files by their location’s country and, for each country, determine which `fileType` appears most frequently.
+   *Hint:* Group by country, then within each group, further group by `fileType` and use `maxBy()` on the counts.
+
+3. **Concatenate File Names per Owner**
+   *Scenario:* Group files by the metadata “owner” and concatenate all file names (separated by commas) for each owner.
+   *Hint:* Use `Collectors.groupingBy()` with `Collectors.mapping()` and then `Collectors.joining(", ")`.
+
+4. **Total File Size per City and File Type**
+   *Scenario:* Group files first by the location’s city and then by file type, and compute the total file size for each combination.
+   *Hint:* Use nested `Collectors.groupingBy()` with a downstream `summingLong(FileManager::getFileSize)`.
+
+5. **Earliest Created File per Owner**
+   *Scenario:* Group files by metadata “owner” and, for each owner, find the file with the earliest `createdDate`.
+   *Hint:* Group by owner and use `Collectors.minBy()` with a comparator based on `createdDate`.
+
+6. **List All Unique Permissions Across Files**
+   *Scenario:* Extract all `Permission` objects from all files, then create a distinct list of permission pairs (userId and accessLevel).
+   *Hint:* Use `flatMap()` on the `permissions` list and then `distinct()` based on a proper `equals()` implementation or a key extractor.
+
+7. **Count Versions per File**
+   *Scenario:* For each file, calculate the total number of versions available across all keys in `versionHistory`.
+   *Hint:* For each file, use a nested stream over `versionHistory.values()`, then flatten and count the versions.
+
+8. **List Files with Multiple Tags**
+   *Scenario:* Filter files that have more than one tag and return their file names, sorted alphabetically.
+   *Hint:* Use `filter()` to check `tags.size() > 1`, then map to file names and sort.
+
+9. **Group Files by Month of Creation**
+   *Scenario:* Group files based on the month (extracted from `createdDate`) in which they were created and list their file IDs.
+   *Hint:* Extract the month from `createdDate` (using a calendar or Java 8 `LocalDate` conversion if possible) and group accordingly with `Collectors.mapping()`.
+
+10. **Find Files Modified After a Specific Version Date**
+    *Scenario:* Given a date, list all files that have any version in their `versionHistory` with a `versionDate` after that date.
+    *Hint:* Use `filter()` on each file by streaming over its version lists (using nested `flatMap()`) and checking if any version meets the date criterion.
+
+11. **Average File Size by Tag**
+    *Scenario:* For each distinct tag, calculate the average file size of the files that contain that tag.
+    *Hint:* Flatten the tags and group by each tag, then use `averagingLong()` on file sizes (you may need to relate files back to their sizes).
+
+12. **Group Files by Specific User's Permission Level**
+    *Scenario:* For a specific user (e.g., "userA"), group files by the access level that user has in the file’s `permissions`.
+    *Hint:* Filter the permissions for that user and then use `groupingBy()` based on the access level, mapping to file objects.
+
+13. **Count Files per Location City and Tag Combination**
+    *Scenario:* Create a composite grouping where, for each city (from `location`), and for each tag, count how many files in that city have that tag.
+    *Hint:* Use nested grouping: first group by city, then flatMap tags and group by tag with counting.
+
+14. **Map File IDs to Their Version Changes**
+    *Scenario:* For each file, create a map where each key is a version key from `versionHistory` (e.g., "v1.0") and its value is a concatenated string of all `changes` from that version’s list.
+    *Hint:* For each file, iterate over the entry set of `versionHistory` and use `Collectors.joining()` on the changes.
+
+15. **Sort Files by Last Modified Date Within Each File Type**
+    *Scenario:* Group files by `fileType`, and within each group, sort the files in descending order based on `modifiedDate`.
+    *Hint:* Group by file type, then sort each list using a comparator on `modifiedDate` in reverse order.
+
+16. **Identify Files with Inconsistent Metadata**
+    *Scenario:* List files where the `"owner"` in metadata does not match any user in the file’s `permissions`.
+    *Hint:* For each file, compare `metadata.get("owner")` with the user IDs from `permissions` and filter if there’s no match.
+
+17. **Aggregate Total Versions per Owner**
+    *Scenario:* Group files by metadata owner and, for each owner, sum the total number of versions across all of their files.
+    *Hint:* Group by owner, then for each file, compute the count of versions (using nested streams) and use `summingInt()`.
+
+18. **Find Files with 'WRITE' Permission but Not 'READ'**
+    *Scenario:* Filter and list files that have at least one permission with access level `"WRITE"` but no permission with access level `"READ"`.
+    *Hint:* Use `filter()` and for each file, check the permissions list with `anyMatch()` and `noneMatch()` accordingly.
+
+19. **Find Top 3 Largest Files per City**
+    *Scenario:* Group files by the location’s city and, within each group, identify the top 3 files sorted by `fileSize` (largest first).
+    *Hint:* Group by city and then, for each group, sort by fileSize in descending order and limit the list to 3 elements.
+
+20. **Map File Type to a List of (File Name, Number of Tags) Pairs**
+    *Scenario:* Create a map where each key is a `fileType` and its value is a list of pairs (or a custom object) containing the file name and the count of tags, sorted in descending order by the number of tags.
+    *Hint:* Use `groupingBy(FileManager::getFileType)` with a downstream collector that maps each file to a pair (e.g., using `AbstractMap.SimpleEntry`), then sort the resulting list.
+
+---

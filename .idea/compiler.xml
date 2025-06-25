@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <excludeFromCompile>
+      <directory url="file://$PROJECT_DIR$/binarySearch/src/main/resources/archetype-resources" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/dynamicProgramming/src/main/resources/archetype-resources" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/binaryTrees/src/main/resources/archetype-resources" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/recursion/src/main/resources/archetype-resources" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/mathsForDsa/src/main/resources/archetype-resources" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/sorting/src/main/resources/archetype-resources" includeSubdirectories="true" />
+    </excludeFromCompile>
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="vault-app" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="binarySearch" target="21" />
+      <module name="binarySerach" target="21" />
+      <module name="binarySerach.main" target="21" />
+      <module name="binarySerach.test" target="21" />
+      <module name="binaryTrees" target="21" />
+      <module name="dynamicProgramming" target="21" />
+      <module name="dynamicProgrraming" target="21" />
+      <module name="dynamicProgrraming.main" target="21" />
+      <module name="dynamicProgrraming.test" target="21" />
+      <module name="mathsForDsa" target="21" />
+      <module name="recursion" target="21" />
+      <module name="sorting" target="21" />
+      <module name="test-encrypted-jar" target="21" />
+      <module name="test-encrypted-jar.app" target="21" />
+      <module name="test-encrypted-jar.app.main" target="21" />
+      <module name="test-encrypted-jar.app.test" target="21" />
+      <module name="test-encrypted-jar.main" target="21" />
+      <module name="test-encrypted-jar.test" target="21" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="vault-app" options="-parameters" />
+    </option>
+  </component>
+</project>

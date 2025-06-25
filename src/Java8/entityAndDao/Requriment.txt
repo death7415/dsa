@@ -1,0 +1,98 @@
+Certainly, here are some challenging scenario-based questions focusing on Java 8 Streams:
+
+1. **Employee Data Analysis**:
+   - Given a list of `Employee` objects, each with properties like `id`, `name`, `department`, `salary`, and `dateOfJoining`, perform the following tasks using Java 8 Streams:
+     - Calculate the average salary of employees in each department.
+     - Identify the employee with the longest tenure in the company.
+     - List the names of employees who joined after a specific date, sorted by their joining date.
+     - Group employees by their department and then by their joining year.
+
+2. **Transaction Processing**:
+   - Given a list of `Transaction` objects, each containing `transactionId`, `userId`, `amount`, `timestamp`, and `status`, accomplish the following using Streams:
+     - Compute the total transaction amount for each user.
+     - Find the top 2 users who have the highest total transaction amounts.
+     - Filter out transactions that are either `FAILED` or `PENDING` and then sort the successful transactions by amount in descending order.
+     - Determine if all transactions within a specific time frame are successful.
+
+3. **Product Inventory Management**:
+   - Given a list of `Product` objects with attributes like `productId`, `name`, `category`, `price`, and `stockQuantity`, perform the following tasks:
+     - Generate a list of products that are out of stock.
+     - Calculate the total value of products available in each category.
+     - Identify the most expensive product in each category.
+     - Create a map where the key is the category, and the value is a list of product names sorted by price.
+
+4. **Student Performance Evaluation**:
+   - Given a list of `Student` objects, each with properties `studentId`, `name`, `gradeLevel`, and a list of `scores` in various subjects, achieve the following using Streams:
+     - Calculate the average score of each student across all subjects.
+     - Determine the top-performing student in each grade level based on average score.
+     - List the names of students who have scored below a certain threshold in any subject.
+     - Group students by their grade level and then partition them into pass and fail groups based on a passing score criteria.
+
+5. **Order Fulfillment System**:
+   - Given a list of `Order` objects, each containing `orderId`, `customerId`, `orderDate`, `deliveryDate`, `items` (a list of `Item` objects), and `status`, perform the following:
+     - Calculate the total number of orders placed by each customer.
+     - Find the average delivery time for delivered orders.
+     - List all items that have been ordered more than a specified number of times.
+     - Generate a report of orders that are overdue for delivery, sorted by the number of days they are overdue.
+
+==================================================================
+
+**Comprehensive Data Processing Challenge**:
+
+You are provided with a list of `Order` objects, each containing the following attributes:
+
+- `orderId` (String): Unique identifier for the order.
+- `customerId` (String): Identifier for the customer who placed the order.
+- `orderDate` (LocalDate): Date when the order was placed.
+- `deliveryDate` (Optional<LocalDate>): Date when the order was delivered; empty if not yet delivered.
+- `items` (List<Item>): List of items included in the order.
+- `status` (OrderStatus): Current status of the order (e.g., `PENDING`, `SHIPPED`, `DELIVERED`, `CANCELLED`).
+
+Each `Item` object includes:
+
+- `productId` (String): Unique identifier for the product.
+- `productName` (String): Name of the product.
+- `category` (String): Category to which the product belongs.
+- `quantity` (int): Number of units ordered.
+- `price` (double): Price per unit.
+
+**Tasks**:
+
+1. **Total Sales per Category**:
+   - Calculate the total sales amount for each product category across all orders.
+
+2. **Top Customers by Spending**:
+   - Identify the top 5 customers who have spent the most, considering only `DELIVERED` orders.
+
+3. **Pending Orders Analysis**:
+   - List all `PENDING` orders that have been pending for more than 7 days from the `orderDate`.
+
+4. **Product Performance**:
+   - Determine the top 3 best-selling products based on the total quantity sold.
+
+5. **Customer Order History**:
+   - For each customer, generate a list of their orders, sorted by `orderDate` in descending order.
+
+6. **Monthly Sales Report**:
+   - Generate a report showing the total sales amount for each month in the current year.
+
+7. **Undelivered Orders Summary**:
+   - Provide a summary of orders that have not been delivered (`status` is not `DELIVERED`), including the count of such orders and the total value.
+
+8. **Category-wise Product List**:
+   - Create a map where each key is a product category, and the corresponding value is a list of product names in that category, sorted alphabetically.
+
+9. **High-Value Orders**:
+   - Identify orders where the total order value exceeds a specified threshold.
+
+10. **Customer Spending Partition**:
+    - Partition customers into two groups: those who have spent more than a specified amount and those who have spent less or equal to that amount.
+
+**Constraints**:
+
+- Utilize Java 8 Stream API features such as filtering, mapping, reducing, collecting, grouping, and partitioning to accomplish the tasks.
+- Ensure that operations are efficient and make use of parallel streams where appropriate.
+- Handle optional values gracefully, especially for fields like `deliveryDate`.
+- Consider edge cases, such as orders with no items or customers with no orders.
+
+This comprehensive challenge is designed to test your ability to apply various Stream operations in Java 8 to perform complex data processing tasks efficiently.
