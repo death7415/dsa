@@ -24,6 +24,10 @@
       <module name="binarySerach.main" target="21" />
       <module name="binarySerach.test" target="21" />
       <module name="binaryTrees" target="21" />
+      <module name="developer-joyofenergy-java" target="21" />
+      <module name="developer-joyofenergy-java.functionalTest" target="21" />
+      <module name="developer-joyofenergy-java.main" target="21" />
+      <module name="developer-joyofenergy-java.test" target="21" />
       <module name="dynamicProgramming" target="21" />
       <module name="dynamicProgrraming" target="21" />
       <module name="dynamicProgrraming.main" target="21" />

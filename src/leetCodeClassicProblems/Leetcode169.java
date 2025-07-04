@@ -1,7 +1,9 @@
+package leetCodeClassicProblems;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class Solution{
+public class Leetcode169 {
     public int majorityElement(int[] nums) {
         int wantFreq = nums.length / 2;
         Map<Integer, Integer> map = new LinkedHashMap<>();
@@ -16,5 +18,6 @@ public class Solution{
         return 0;
     }
     public static void main(String[] args) {
+
     }
 }
