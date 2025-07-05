@@ -244,4 +244,4 @@
 
 ---
 
-## End of Java Collections Guide (50 Scenarios)
+## End of Java Collections Guide
