@@ -1,20 +1,36 @@
-import java.util.LinkedHashMap;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Map;
+/*
 
-public class Solution{
-    public int majorityElement(int[] nums) {
-        int wantFreq = nums.length / 2;
-        Map<Integer, Integer> map = new LinkedHashMap<>();
-        for (int num : nums) {
-            map.put(num, map.getOrDefault(num, 0) + 1);
-        }
-        for(Map.Entry<Integer, Integer> entry : map.entrySet()){
-            if(entry.getValue() > wantFreq){
-                return entry.getKey();
-            }
-        }
-        return 0;
+Employee
+   name
+   salary
+
+select e.name from Employee e order by desc limit 1 offset 1
+
+
+ */
+
+class Employee{
+    public String name;
+
+    public Employee(String name){
+        this.name = name;
     }
+}
+public class Solution{
     public static void main(String[] args) {
+        Map<Employee, Integer> map = new HashMap<>();
+        map.put(new Employee("abc"), 1000);
+        map.put(new Employee("xyz"), 2000);
+        map.put(new Employee("tuv"), 1500);
+
+        var res = map.entrySet()
+                .stream()
+                .sorted(Comparator.comparingInt(Map.Entry::getValue))
+                .toList();
+
+        System.out.println(res);
     }
 }
